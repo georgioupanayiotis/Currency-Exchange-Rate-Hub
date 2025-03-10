@@ -1,28 +1,50 @@
-name: Run Tests
+services:
+  postgres:
+    image: postgres:latest
+    env:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    options: >-
+      --health-cmd "pg_isready -U postgres"
+      --health-interval 10s
+      --health-timeout 5s
+      --health-retries 5
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+steps:
+  - name: Checkout Repository
+    uses: actions/checkout@v3
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+  - name: Set up Node.js
+    uses: actions/setup-node@v3
+    with:
+      node-version: 18
+      cache: 'npm'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+  - name: Install Dependencies
+    run: npm install
 
-      - name: Install Dependencies
-        run: npm install
+  - name: Set up Environment Variables
+    run: |
+      echo "PORT=3000" >> .env
+      echo "DATABASE_URL=postgres://postgres:postgres@localhost:5432/testdb" >> .env
+      echo "REDIS_URL=redis://localhost:6379" >> .env
+      echo "OPENEXCHANGE_API_KEY=dummy_key" >> .env
+      echo "EXCHANGERATES_API_KEY=dummy_key" >> .env
+      echo "FETCH_RATE_INTERVAL=*/5 * * * *" >> .env
 
-      - name: Run Tests
-        run: npm test
+  - name: Run Database Migrations
+    run: npx sequelize-cli db:migrate
+
+  - name: Run Tests
+    run: npm test
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
+      REDIS_URL: redis://localhost:6379
