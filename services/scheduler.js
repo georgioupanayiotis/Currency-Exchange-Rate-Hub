@@ -5,8 +5,6 @@ const { fetchRates } = require("./openExchangeService")
 // Read interval from environment variable or default to "*/5 * * * *" (every 5 minutes)
 // eslint-disable-next-line no-undef
 const cronInterval = process.env.FETCH_RATE_INTERVAL || 5
-// eslint-disable-next-line no-undef
-console.log('process.env.FETCH_RATE_INTERVAL - ', process.env.FETCH_RATE_INTERVAL)
 
 cron.schedule(`*/${cronInterval} * * * *`, async () => {
   console.log(`⏳ Fetching rates from scheduler after ${cronInterval} mins...`)
