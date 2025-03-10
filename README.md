@@ -86,6 +86,14 @@ Ensure PostgreSQL and Redis are running:
 ***The server runs at http://localhost:3000 🚀***
 
 ------
+
+
+## 📚 API documentation for Currency Exchange Rate Hub
+
+http://localhost:3000/api-docs/
+
+![Screenshot 2025-03-10 at 17 03 52](https://github.com/user-attachments/assets/e4ea51fa-a451-4474-9921-f83cb0d28bf9)
+------
 ## 🔥 Setup Integrations
 ### 📍 1. Add a new integration
 ```
@@ -242,12 +250,6 @@ The project includes Jest tests for API endpoints.
 Run all tests:
 
 ```npm test```
-
-## 📚 API documentation for Currency Exchange Rate Hub
-
-http://localhost:3000/api-docs/
-
-![Screenshot 2025-03-10 at 17 03 52](https://github.com/user-attachments/assets/e4ea51fa-a451-4474-9921-f83cb0d28bf9)
 
 ## ⛑️ Health Checks & Status Page
 
