@@ -51,6 +51,10 @@ cd currency-exchange-rate-hub`
 
 Create a .env file and add your API keys:
 
+You will need to create an account and get API keys from:
+- https://openexchangerates.org
+- http://api.exchangeratesapi.io
+
 ```PORT=3000
 DATABASE_URL=postgres://youruser:yourpassword@localhost:5432/yourdb
 REDIS_URL=redis://localhost:6379
@@ -71,12 +75,106 @@ Ensure PostgreSQL and Redis are running:
 
 `redis-server`
 
-### 5️⃣ Start the application
+### 5️⃣ Install all dependecies
+
+`npm install`
+
+### 6️⃣ Start the application
 
 `npm start`
 
 ***The server runs at http://localhost:3000 🚀***
 
+------
+## 🔥 Setup Integrations
+### 📍 1. Add a new integration
+```
+POST http://localhost:3000/api/integrations
+
+Request body: 
+{
+   "name": "openexchangerates.org",
+   "baseUrl": "https://openexchangerates.org/api",
+   "apiKey": "your_api_key",
+   "rateLimit": 1000
+}
+
+Response:
+
+{
+    "apiKey": "your_api_key",
+    "id": 2,
+    "name": "exchangeratesapi.io",
+    "baseUrl": "http://api.exchangeratesapi.io/v1/",
+    "rateLimit": 100,
+    "updatedAt": "2025-03-10T14:12:10.518Z",
+    "createdAt": "2025-03-10T14:12:10.518Z"
+}
+```
+
+### 📍 2. Get all integrations
+```
+Get http://localhost:3000/api/integrations
+
+Response:
+
+[
+  {
+        "apiKey": "your_api_key",
+        "id": 1,
+        "name": "exchangeratesapi.io",
+        "baseUrl": "http://api.exchangeratesapi.io/v1/",
+        "rateLimit": 100,
+        "createdAt": "2025-03-10T13:57:12.811Z",
+        "updatedAt": "2025-03-10T13:57:12.811Z"
+    },
+]
+```
+
+### 📍 3. Update integration
+```
+PUT http://localhost:3000/api/integrations/1
+
+Request body: 
+
+{
+  "rateLimit": 500
+}
+
+Response:
+
+[
+  {
+        "apiKey": "your_api_key",
+        "id": 1,
+        "name": "exchangeratesapi.io",
+        "baseUrl": "http://api.exchangeratesapi.io/v1/",
+        "rateLimit": 500,
+        "createdAt": "2025-03-10T13:57:12.811Z",
+        "updatedAt": "2025-03-10T13:57:12.811Z"
+    },
+]
+```
+
+### 📍 4. Delete integration
+```
+DELETE http://localhost:3000/api/integrations/1
+
+
+Response:
+
+[
+  {
+        "apiKey": "your_api_key",
+        "id": 1,
+        "name": "exchangeratesapi.io",
+        "baseUrl": "http://api.exchangeratesapi.io/v1/",
+        "rateLimit": 500,
+        "createdAt": "2025-03-10T13:57:12.811Z",
+        "updatedAt": "2025-03-10T13:57:12.811Z"
+    },
+]
+```
 ------
 ## 🔥 API Endpoints
 
