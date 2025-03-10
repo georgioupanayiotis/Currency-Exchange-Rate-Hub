@@ -7,10 +7,13 @@ const { sequelize } = require("./models")
 const integrationRoutes = require("./routes/integrationRoutes")
 const rateRoutes = require("./routes/rateRoutes")
 const conversionRoutes = require("./routes/conversionRoutes")
+const statusMonitor = require("express-status-monitor");
 
 dotenv.config()
 const app = express()
 
+// Enable the status monitor
+app.use(statusMonitor());
 app.use(express.json())
 
 app.use("/api/integrations", integrationRoutes)
