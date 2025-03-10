@@ -1,0 +1,35 @@
+{
+  "name": "currency-exchange-rate-hub",
+  "version": "1.0.0",
+  "description": "Back-end Developer Assessment - Currency Exchange Rate Hub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgioupanayiotis/Currency-Exchange-Rate-Hub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgioupanayiotis/Currency-Exchange-Rate-Hub/issues"
+  },
+  "homepage": "https://github.com/georgioupanayiotis/Currency-Exchange-Rate-Hub#readme",
+  "dependencies": {
+    "axios": "^1.8.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "pg": "^8.13.3",
+    "pg-hstore": "^2.3.4",
+    "redis": "^4.7.0",
+    "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
+  }
+}
