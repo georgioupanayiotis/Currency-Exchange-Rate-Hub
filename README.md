@@ -243,3 +243,6 @@ Run all tests:
 
 ```npm test```
 
+## 🔥 API documentation for Currency Exchange Rate Hub
+http://localhost:3000/api-docs/
+
